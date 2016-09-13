@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">CompositeProject</string>
+    <string name="config_logcat_tag">logcat_tag</string>
+</resources>
