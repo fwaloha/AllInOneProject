@@ -7,3 +7,8 @@
 /build
 /captures
 .externalNativeBuild
+
+*.log
+*.keystore
+.idea  #ide 相关
+*.apk  #optional
