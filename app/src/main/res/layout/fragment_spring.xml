@@ -16,5 +16,5 @@
         android:layout_height="wrap_content"
         android:textColor="#000"
         android:textSize="20sp"
-        android:text="page 1" />
+        android:text="spring" />
 </LinearLayout>

@@ -7,11 +7,54 @@
     android:orientation="vertical"
     tools:context="com.example.wangfei.compositeproject.control.MainActivity">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pvp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-    </android.support.v4.view.ViewPager>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        ></android.support.v4.view.ViewPager>
+
+    <RadioGroup
+        android:id="@+id/rgroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#6666"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <RadioButton
+            android:id="@+id/rb1"
+            style="@style/radiogroup_style"
+            android:checked="true"
+            android:drawableTop="@drawable/sl_google_blue_gray"
+            android:onClick="onClick"
+            android:text="spring"
+            android:textColor="@drawable/sl_text_blue_gray" />
+
+        <RadioButton
+            android:id="@+id/rb2"
+            style="@style/radiogroup_style"
+            android:drawableTop="@drawable/sl_chrome_blue_gray"
+            android:onClick="onClick"
+            android:text="summer"
+            android:textColor="@drawable/sl_text_blue_gray" />
+
+        <RadioButton
+            android:id="@+id/rb3"
+            style="@style/radiogroup_style"
+            android:drawableTop="@drawable/sl_android_blue_gray"
+            android:onClick="onClick"
+            android:text="autumn"
+            android:textColor="@drawable/sl_text_blue_gray" />
+
+        <RadioButton
+            android:id="@+id/rb4"
+            style="@style/radiogroup_style"
+            android:drawableTop="@drawable/sl_apple_blue_gray"
+            android:onClick="onClick"
+            android:text="winter"
+            android:textColor="@drawable/sl_text_blue_gray" />
+    </RadioGroup>
 
 </LinearLayout>

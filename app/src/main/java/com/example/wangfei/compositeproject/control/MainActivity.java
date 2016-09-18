@@ -2,40 +2,29 @@ package com.example.wangfei.compositeproject.control;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.CountDownTimer;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.PopupWindow;
-import android.widget.TextView;
 
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.NetworkImageView;
-import com.example.wangfei.compositeproject.MyApplication;
 import com.example.wangfei.compositeproject.R;
+import com.example.wangfei.compositeproject.model.adapter.MyVpAdapter;
 import com.example.wangfei.compositeproject.model.network.RequestQun;
-import com.example.wangfei.compositeproject.model.utils.ImageLoaderUtil;
 import com.example.wangfei.compositeproject.model.utils.LogUtils;
 import com.example.wangfei.compositeproject.model.utils.ToastUtils;
+import com.example.wangfei.compositeproject.view.AutumnFragment;
+import com.example.wangfei.compositeproject.view.SpringFragment;
+import com.example.wangfei.compositeproject.view.SummerFragment;
+import com.example.wangfei.compositeproject.view.WinterFragment;
 
-import java.security.MessageDigest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
 
-    TextView mTvCountry, mTvIP;
-    private Button mTvCountryId;
-    private int millis;
     private Context mContex;
-    private ViewPager parentVp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,16 +33,28 @@ public class MainActivity extends BaseActivity {
         mContex = MainActivity.this;
         initViews();
         initData();
+
+        findViewById(R.id.rgroup).setOnClickListener(this);
+
+//        FragmentManager fragmentManager = getFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        SpringFragment springFragment = new SpringFragment();
+////        fragmentTransaction.replace(R.id.frame, springFragment);
+//        fragmentTransaction.commit();
+
+        ViewPager viewpager = (ViewPager) findViewById(R.id.viewpager);
+        ArrayList<Fragment> fragments = new ArrayList<>();
+        fragments.add(new SpringFragment());
+        fragments.add(new SummerFragment());
+        fragments.add(new AutumnFragment());
+        fragments.add(new WinterFragment());
+
+        MyVpAdapter myVpAdapter = new MyVpAdapter(getSupportFragmentManager(), fragments);
+        viewpager.setAdapter(myVpAdapter);
     }
 
     private void initViews() {
 
-        parentVp = (ViewPager) findViewById(R.id.pvp);
-        View view1 = View.inflate(mContex, R.layout.vp1_layout, null);
-        View view2 = View.inflate(mContex, R.layout.vp2_layout, null);
-
-        parentVp.addView(view1);
-        parentVp.addView(view2);
     }
 
     private void initData() {
@@ -92,5 +93,31 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onStop() {
         super.onStop();
+    }
+
+    @Override
+    public void onClick(View v) {
+//        FragmentManager fragmentManager = this.getFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        switch (v.getId()) {
+            case R.id.rb1:
+//                fragmentTransaction.replace(R.id.frame, new SpringFragment());
+                break;
+            case R.id.rb2:
+//                fragmentTransaction.replace(R.id.frame, new SummerFragment());
+
+                break;
+            case R.id.rb3:
+//                fragmentTransaction.replace(R.id.frame, new AutumnFragment());
+
+                break;
+            case R.id.rb4:
+//                fragmentTransaction.replace(R.id.frame, new WinterFragment());
+
+                break;
+        }
+
+//        fragmentTransaction.commit();
     }
 }
