@@ -39,4 +39,38 @@ public class TipsOfUtilsUse {
      * volley的简易网络图片加载,xml中的布局
      */
 //    <com.android.volley.toolbox.NetworkImageView
+
+
+    /**
+     * spannable 调用方式
+     */
+//    TextView mSpanner = (TextView) view.findViewById(R.id.tv_spanner);
+//
+//    SpanUtils.bindSpanableStr("diandlsjdlfiwoejfowpflj");
+//    SpanUtils.addClickAbleSpan(new ClickAble(Color.CYAN,false),mSpanner,3,9);
+//    mSpanner.setText(SpanUtils.getSpannableStr());
+//}
+//
+//
+//    public class ClickAble extends ClickableSpan{
+//
+//    private final int mColor;
+//    private final boolean mUnderline;
+//
+//    @Override
+//    public void onClick(View widget) {
+//        ToastUtils.show("haha,success!");
+//    }
+//
+//    public ClickAble(int color, boolean underline) {
+//        mColor = color;
+//        mUnderline = underline;
+//    }
+//
+//    @Override
+//    public void updateDrawState(TextPaint ds) {
+//        ds.setColor(mColor);
+//        ds.setUnderlineText(mUnderline);
+//    }
+//}
 }

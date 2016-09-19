@@ -1,17 +1,27 @@
 package com.example.wangfei.compositeproject.view;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
 import com.example.wangfei.compositeproject.R;
 import com.example.wangfei.compositeproject.model.BaseFragment;
 import com.example.wangfei.compositeproject.model.utils.ImageLoaderUtil;
+import com.example.wangfei.compositeproject.model.utils.SpanUtils;
+import com.example.wangfei.compositeproject.model.utils.ToastUtils;
+import com.example.wangfei.compositeproject.model.utils.ViewUiUtils;
 
 import java.util.ArrayList;
 
@@ -23,17 +33,18 @@ public class SpringFragment extends BaseFragment {
 
     private View view;
 
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_spring, null);
         return view;
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -71,5 +82,46 @@ public class SpringFragment extends BaseFragment {
                 container.removeView((View) object);
             }
         });
+
+        final TextView mTvTitle = (TextView) view.findViewById(R.id.tv_title);
+        final TextView mTvInfo = (TextView) view.findViewById(R.id.tv_info);
+        mTvInfo.setText("hahahhahahdhadhasldjfl打了多久了发掘的法律手段困死了都解放了圣诞节啥地方记录");
+
+       view.findViewById(R.id.ll_title).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtils.show("che");
+                ViewUiUtils.expend(mTvTitle, mTvInfo);
+            }
+        });
+
+        TextView mSpanner = (TextView) view.findViewById(R.id.tv_spanner);
+
+        SpanUtils.bindSpanableStr("diandlsjdlfiwoejfowpflj");
+        SpanUtils.addForegroundColor(Color.BLUE,3,9);
+        mSpanner.setText(SpanUtils.getSpannableStr());
+    }
+
+
+    public class ClickAble extends ClickableSpan{
+
+        private final int mColor;
+        private final boolean mUnderline;
+
+        @Override
+        public void onClick(View widget) {
+            ToastUtils.show("haha,success!");
+        }
+
+        public ClickAble(int color, boolean underline) {
+            mColor = color;
+            mUnderline = underline;
+        }
+
+        @Override
+        public void updateDrawState(TextPaint ds) {
+            ds.setColor(mColor);
+            ds.setUnderlineText(mUnderline);
+        }
     }
 }
