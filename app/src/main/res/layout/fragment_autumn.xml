@@ -4,17 +4,25 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/vp"
-        android:layout_width="match_parent"
-        android:layout_height="130dp">
-
-    </android.support.v4.view.ViewPager>
+    <include layout="@layout/base_toobar" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="autumn"
         android:textColor="#000"
-        android:textSize="20sp"
-        android:text="autumn" />
+        android:textSize="20sp" />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <!--<android.support.v7.widget.RecyclerView-->
+            <!--android:id="@+id/recycler"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content">-->
+
+        <!--</android.support.v7.widget.RecyclerView>-->
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

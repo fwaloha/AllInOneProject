@@ -4,11 +4,13 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.android.volley.VolleyError;
 import com.example.wangfei.compositeproject.R;
+import com.example.wangfei.compositeproject.model.NoPreloadViewPager;
 import com.example.wangfei.compositeproject.model.adapter.MyVpAdapter;
 import com.example.wangfei.compositeproject.model.network.RequestQun;
 import com.example.wangfei.compositeproject.model.utils.LogUtils;
@@ -25,16 +27,38 @@ import java.util.Map;
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private Context mContex;
+    private NoPreloadViewPager viewpager;
+    private RadioGroup mRadiogroup;
+    private int viewState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+        LogUtils.d("activity-----", "call onCreate");
+
         setContentView(R.layout.activity_main);
+        View decorView = getWindow().getDecorView();
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+//            viewState = View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+//                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+//                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+//            decorView.setSystemUiVisibility(viewState);
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                getWindow().setNavigationBarColor(Color.TRANSPARENT);
+//                getWindow().setStatusBarColor(Color.TRANSPARENT);
+//            }
+//        }
+//        ActionBar supportActionBar = getSupportActionBar();
+//        supportActionBar.hide();
+
         mContex = MainActivity.this;
         initViews();
         initData();
 
-        findViewById(R.id.rgroup).setOnClickListener(this);
+        mRadiogroup = (RadioGroup) findViewById(R.id.rgroup);
+//        mRadiogroup.setOnClickListener(this);
+
 
 //        FragmentManager fragmentManager = getFragmentManager();
 //        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -42,15 +66,74 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 ////        fragmentTransaction.replace(R.id.frame, springFragment);
 //        fragmentTransaction.commit();
 
-        ViewPager viewpager = (ViewPager) findViewById(R.id.viewpager);
+        viewpager = (NoPreloadViewPager) findViewById(R.id.viewpager);
+        viewpager.setOffscreenPageLimit(0);
         ArrayList<Fragment> fragments = new ArrayList<>();
         fragments.add(new SpringFragment());
         fragments.add(new SummerFragment());
         fragments.add(new AutumnFragment());
         fragments.add(new WinterFragment());
 
+        fragments.get(0).setUserVisibleHint(false);
+
         MyVpAdapter myVpAdapter = new MyVpAdapter(getSupportFragmentManager(), fragments);
+        viewpager.setOffscreenPageLimit(0);
         viewpager.setAdapter(myVpAdapter);
+        mRadiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.rb1:
+                        viewpager.setCurrentItem(0, true);
+                        break;
+                    case R.id.rb2:
+                        viewpager.setCurrentItem(1, true);
+                        break;
+                    case R.id.rb3:
+                        viewpager.setCurrentItem(2, true);
+                        break;
+                    case R.id.rb4:
+                        viewpager.setCurrentItem(3, true);
+                        break;
+                }
+            }
+        });
+
+//        viewpager.OnPageChangeListener(){
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position) {
+//
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//
+//            }
+//        });
+
+        viewpager.setOnPageChangeListener(new NoPreloadViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                RadioButton mButton = (RadioButton) mRadiogroup.getChildAt(position);
+                LogUtils.d("-----",position+":"+positionOffset+":"+positionOffsetPixels);
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                RadioButton mRadioButton = (RadioButton) mRadiogroup.getChildAt(position);
+                mRadioButton.setChecked(true);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     private void initViews() {
@@ -79,6 +162,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 ToastUtils.show("success!" + response);
                 LogUtils.d("----success", response);
 //                dialog.dismiss();
+                new String("kk");
             }
 
             @Override
@@ -90,10 +174,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         });
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
 
     @Override
     public void onClick(View v) {
@@ -103,6 +183,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.rb1:
 //                fragmentTransaction.replace(R.id.frame, new SpringFragment());
+
                 break;
             case R.id.rb2:
 //                fragmentTransaction.replace(R.id.frame, new SummerFragment());
@@ -119,5 +200,36 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
 
 //        fragmentTransaction.commit();
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LogUtils.d("activity-----", "call onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LogUtils.d("activity-----", "call onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LogUtils.d("activity-----", "call onPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        LogUtils.d("activity-----", "call onStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        LogUtils.d("activity-----", "call onDestroy");
     }
 }

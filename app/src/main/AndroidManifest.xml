@@ -3,6 +3,37 @@
     package="com.example.wangfei.compositeproject">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <!-- 这个权限用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 这个权限用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!-- 用于读取手机当前的状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- SD卡读取权限，用户写入离线定位数据 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+
+    <!-- api21之后必须使用此权限而不是camera permission -->
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
+
+    <!--小米推送-->
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <permission android:name="com.example.wangfei.compositeproject.permission.MIPUSH_RECEIVE" android:protectionLevel="signature" />
+    <uses-permission android:name="com.example.wangfei.compositeproject.permission.MIPUSH_RECEIVE" />
+    <!--小米推送 end-->
 
     <application
         android:name=".MyApplication"
@@ -27,6 +58,84 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".control.ToolbarActivity"
+            android:theme="@style/AppTheme.base" />
+        <activity
+            android:name=".control.LineActivity"
+            android:theme="@style/AppTheme.NoActionbar" />
+
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
+
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="ZyAsb4WpoKoYta3a8lGZSfR9m0336InM" />
+
+        <activity android:name=".control.LbsActivity" />
+
+        <receiver android:name=".model.broadcastreceiver.TestBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
+            </intent-filter>
+        </receiver>
+
+        <!--小米推送 start-->
+        <service
+            android:name=".model.service.UpdateApkService"
+            android:exported="true"></service>
+
+        <activity android:name=".model.TestActivity"></activity>
+
+        <service
+            android:enabled="true"
+            android:process=":pushservice"
+            android:name="com.xiaomi.push.service.XMPushService"/>
+        <service
+            android:name="com.xiaomi.push.service.XMJobService"
+            android:enabled="true"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":pushservice" />
+        <!--注：此service必须在3.0.1版本以后（包括3.0.1版本）加入-->
+        <service
+            android:enabled="true"
+            android:exported="true"
+            android:name="com.xiaomi.mipush.sdk.PushMessageHandler" />
+        <service android:enabled="true"
+            android:name="com.xiaomi.mipush.sdk.MessageHandleService" />
+        <!--注：此service必须在2.2.5版本以后（包括2.2.5版本）加入-->
+        <receiver
+            android:exported="true"
+            android:name="com.xiaomi.push.service.receivers.NetworkStatusReceiver" >
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:exported="false"
+            android:process=":pushservice"
+            android:name="com.xiaomi.push.service.receivers.PingReceiver" >
+            <intent-filter>
+                <action android:name="com.xiaomi.push.PING_TIMER" />
+            </intent-filter>
+        </receiver>
+        <!--自定义的broadcast receiver-->
+        <receiver android:name=".model.receiver.AppMessageReceiver">
+            <intent-filter>
+                <action android:name="com.xiaomi.mipush.RECEIVE_MESSAGE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.xiaomi.mipush.MESSAGE_ARRIVED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.xiaomi.mipush.ERROR" />
+            </intent-filter>
+        </receiver>
+        <!--小米推送 end-->
     </application>
 
 </manifest>

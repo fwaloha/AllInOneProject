@@ -12,6 +12,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.NinePatchDrawable;
 import android.util.AttributeSet;
+import android.widget.ImageView;
 
 import com.android.volley.toolbox.NetworkImageView;
 import com.example.wangfei.compositeproject.R;
@@ -20,7 +21,7 @@ import com.example.wangfei.compositeproject.R;
  * Created by wangfei on 16/9/13.
  */
 
-public class CircleImageview extends NetworkImageView {
+public class CircleImageview extends ImageView {
     public CircleImageview(Context context) {
         super(context);
         mContext = context;

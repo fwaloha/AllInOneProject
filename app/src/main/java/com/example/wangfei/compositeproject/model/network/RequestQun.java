@@ -11,7 +11,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.wangfei.compositeproject.MyApplication;
 import com.example.wangfei.compositeproject.R;
-import com.example.wangfei.compositeproject.control.MainActivity;
 import com.example.wangfei.compositeproject.model.BaseDialog;
 import com.example.wangfei.compositeproject.model.utils.ToastUtils;
 
@@ -19,7 +18,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Map;
-
 /**
  * Created by wangfei on 16/9/8.
  */
@@ -99,15 +97,19 @@ public class RequestQun {
 
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
+
                 return params;
             }
         };
         request.setRetryPolicy(new com.android.volley.DefaultRetryPolicy(10 * 1000, 2, 1.0f));
+
         MyApplication.getRequestQueue().add(request);
 
     }
 
-    public static interface NetWorkRequestListener {
+
+
+    public interface NetWorkRequestListener {
         void onPreRequest();
 
         void onResponse(String response);

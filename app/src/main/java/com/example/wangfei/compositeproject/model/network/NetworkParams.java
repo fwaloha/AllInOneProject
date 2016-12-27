@@ -22,7 +22,7 @@ public class NetworkParams {
 
         for (int i = 0; i < keys.size(); i++) {
             String key = keys.get(i);
-            String value = map.get(key);
+            String value = (String) map.get(key);
             if (value != null) {
                 stringBuilder.append((i == 0 ? "" : "&") + key + "=" + value);
             } else {

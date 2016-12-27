@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:background="@color/cyan"
+    tools:showIn="@layout/fragment_autumn">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_topleft"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/cyan"
+            android:drawableLeft="@mipmap/android_blue"
+            android:text="btn" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="haha" />
+
+    </LinearLayout>
+
+</android.support.v7.widget.Toolbar>

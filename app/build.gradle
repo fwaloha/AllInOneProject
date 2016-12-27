@@ -1,4 +1,7 @@
 apply plugin: 'com.android.application'
+//apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'android-apt'
+apply plugin: 'com.antfortune.freeline'
 
 android {
     compileSdkVersion 23
@@ -11,10 +14,25 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+//    so文件的引用
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    allprojects {
+        repositories {
+            // viewpagerindicator
+            maven { url "https://jitpack.io" }
         }
     }
 }
@@ -25,11 +43,31 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:23.4.0'
-
-//  圆形图片
+    //  圆形图片
     compile 'de.hdodenhof:circleimageview:2.1.0'
-
-
     testCompile 'junit:junit:4.12'
     compile project(':volley')
+    /**
+     *  butterknife
+     */
+    compile 'com.jakewharton:butterknife:8.4.0'
+    apt 'com.jakewharton:butterknife-compiler:8.4.0'
+    compile 'com.android.support:recyclerview-v7:23.1.1'
+    compile 'com.android.support:cardview-v7:23.1.1'
+    //   使用design library
+    compile 'com.android.support:design:23.4.0'
+    //    第三方的工具类
+    //    compile 'com.luffykou:android-common-utils:1.1.3'
+    compile 'com.google.code.gson:gson:2.7'
+    compile files('libs/badgeview.jar')
+    //    七牛
+    compile 'com.qiniu:qiniu-android-sdk:7.2.+'
+    // viewpagerindicator
+    compile 'com.github.JakeWharton:ViewPagerIndicator:2.4.1'
+
+    //glide
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+
+    //okhttp
+    compile 'com.squareup.okhttp3:okhttp:3.4.2'
 }

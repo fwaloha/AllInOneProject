@@ -30,4 +30,16 @@ public class MyVpAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return 4;
     }
+
+//    @Override
+//    public Object instantiateItem(ViewGroup container, int position) {
+//
+//        Fragment fragment = fragments.get(position);
+//        return super.instantiateItem(container, position);
+//    }
+//
+//    @Override
+//    public boolean isViewFromObject(View view, Object object) {
+//        return view == object;
+//    }
 }

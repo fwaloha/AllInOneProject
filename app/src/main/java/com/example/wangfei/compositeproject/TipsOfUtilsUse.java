@@ -6,6 +6,21 @@ package com.example.wangfei.compositeproject;
 
 public class TipsOfUtilsUse {
 
+    private static TipsOfUtilsUse mInstance;
+//单例模式 懒汉式
+    private TipsOfUtilsUse() {
+    }
+
+    public static synchronized TipsOfUtilsUse getInstance(){
+        if(mInstance == null){
+            synchronized (TipsOfUtilsUse.class) {
+                if(mInstance == null)
+                mInstance = new TipsOfUtilsUse();
+            }
+        }
+        return mInstance;
+    }
+
     /**
      * 网络访问,需要 url, params(post),context(展示dialog需要)
      */
